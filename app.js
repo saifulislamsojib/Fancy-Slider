@@ -35,6 +35,7 @@ const showImages = (images) => {
   })
 }
 
+// Get images
 const getImages = (query) => {
   fetch(`https://pixabay.com/api/?key=${KEY}=${query}&image_type=photo&pretty=true`)
     .then(response => response.json())
@@ -42,11 +43,13 @@ const getImages = (query) => {
     .catch(() => errorHandler("Something Went wrong!! Please try again"));
 }
 
+// Handler error
 const  errorHandler = (err) => {
   const errorMessage = document.getElementById('error-message');
   errorMessage.innerText = err;
 }
 
+// Select item
 let slideIndex = 0;
 const selectItem = (event, img) => {
   let element = event.target;
@@ -67,6 +70,7 @@ const SelectedItemCount = () => {
   SelectedCount.innerText = sliders.length;
 }
 
+// Create slider
 var timer
 const createSlider = () => {
   // check slider image length
@@ -134,12 +138,13 @@ const changeSlide = (index) => {
 
   items[index].style.display = "block"
 }
-
+// Toggle spinner
 const spinnerToggle = () => {
   const toggleSpinner = document.getElementById('toggle-spinner');
   toggleSpinner.classList.toggle('d-none');
 }
 
+// Search button Click event handler
 const search = document.getElementById('search');
 searchBtn.addEventListener('click', function () {
   document.querySelector('.main').style.display = 'none';
@@ -158,12 +163,14 @@ searchBtn.addEventListener('click', function () {
   sliders.length = 0;
 })
 
+// Search enter keypress event handler
 search.addEventListener("keypress", event => {
   if (event.key === 'Enter') {
     searchBtn.click();
   }
 })
 
+// Slider button Click event handler
 sliderBtn.addEventListener('click', function () {
   createSlider()
 })
