@@ -11,10 +11,6 @@
   margin: 0 auto;
 }
 
-.duration-input{
-  max-width: 550px;
-}
-
 .gallery-header {
   display: none;
 }
@@ -64,12 +60,17 @@ img {
   display: none;
 }
 
-@media (max-width: 767px) {
-  /* .justify-content-around.align-items-center.mt-3.gallery-header.mb-2 {
-    flex-direction: column;
-  } */
+@media (max-width: 992px) {
+  .duration-input{
+    max-width: 800px;
+  }
   #sliders {
-    height: 300px;
-    width: 90%;
+    max-height: 350px;
+    width: 95%;
+  }
+}
+@media (min-width: 992px) { 
+  .duration-input{
+    max-width: 430px;
   }
 }

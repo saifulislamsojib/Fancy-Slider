@@ -19,20 +19,23 @@
     <h3 class="mt-2 text-center">Search Image for create slider</h3>
     <div class="input-group search-input my-3">
       <input type="text" class="form-control" id="search" placeholder="Search Image for create slider..">
-      <button type="button" id="search-btn" class="btn btn-primary">Search</button>
+      <button type="button" id="search-btn" class="btn btn-primary ms-3">Search</button>
     </div>
+    <!-- spinner toggle -->
     <div class="d-flex justify-content-center mt-4">
       <div id="toggle-spinner" class="spinner-border text-primary d-none" role="status">
         <span class="visually-hidden">Loading...</span>
       </div>
     </div>
+    <h3 class="text-center text-danger mt-3" id="error-message"></h3>
     <section class="images">
       <div class="row my-3 gallery-header mb-3">
-        <div class="d-flex align-items-center flex-column flex-md-row">
+        <div class="d-flex align-items-center flex-column flex-lg-row">
           <h3 class="head-title">Select image for create slider</h3>
+          <h4 class="mx-auto">Selected: <strong id="Selected-count">0</strong> </h4>
           <div class="input-group duration-input ms-auto">
             <input class="form-control" id="duration" placeholder="slider change duration">
-            <button id="create-slider" class="btn btn-primary">Create slider</button>
+            <button id="create-slider" class="btn btn-primary ms-3">Create slider</button>
           </div>
         </div>
       </div>

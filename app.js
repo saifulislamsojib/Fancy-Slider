@@ -15,25 +15,36 @@ const KEY = '15674931-a9d714b6e9d654524df198e00&q';
 
 // show images 
 const showImages = (images) => {
+ if (!images.length) {
+  errorHandler("No Matching Images Found");
+  galleryHeader.style.display = 'none';
+ }
+ else {
+  galleryHeader.style.display = 'flex';
   imagesArea.style.display = 'block';
+ }
   gallery.innerHTML = '';
   spinnerToggle();
+  SelectedItemCount();
   // show gallery title
-  galleryHeader.style.display = 'flex';
   images.forEach(image => {
     let div = document.createElement('div');
     div.className = 'col-lg-3 col-md-4 col-xs-6 img-item mb-2';
     div.innerHTML = ` <img class="img-fluid img-thumbnail" onclick=selectItem(event,"${image.webformatURL}") src="${image.webformatURL}" alt="${image.tags}">`;
     gallery.appendChild(div)
   })
-
 }
 
 const getImages = (query) => {
   fetch(`https://pixabay.com/api/?key=${KEY}=${query}&image_type=photo&pretty=true`)
     .then(response => response.json())
     .then(data => showImages(data.hits))
-    .catch(err => console.log(err))
+    .catch(() => errorHandler("Something Went wrong!! Please try again"));
+}
+
+const  errorHandler = (err) => {
+  const errorMessage = document.getElementById('error-message');
+  errorMessage.innerText = err;
 }
 
 let slideIndex = 0;
@@ -47,7 +58,15 @@ const selectItem = (event, img) => {
   } else {
     sliders = sliders.filter(slider => slider !== img);
   }
+  SelectedItemCount();
 }
+
+// Selected Item Count
+const SelectedItemCount = () => {
+  const SelectedCount = document.getElementById('Selected-count');
+  SelectedCount.innerText = sliders.length;
+}
+
 var timer
 const createSlider = () => {
   // check slider image length
@@ -123,10 +142,18 @@ const spinnerToggle = () => {
 
 const search = document.getElementById('search');
 searchBtn.addEventListener('click', function () {
-  spinnerToggle();
   document.querySelector('.main').style.display = 'none';
   clearInterval(timer);
-  getImages(search.value);
+  errorHandler("");
+  if (!search.value) {
+    errorHandler("Please enter a search..");
+    galleryHeader.style.display = 'none';
+    imagesArea.style.display = 'none';
+  }
+  else {
+    spinnerToggle();
+    getImages(search.value);
+  }
   search.value = '';
   sliders.length = 0;
 })
